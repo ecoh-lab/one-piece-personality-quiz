@@ -1,0 +1,138 @@
+Me: I am a computer science student and for my final project I have to develop a web application with python and Drafter. It has to have at least 7 routes, 5 pages, a State dataclass with at least 4 fields (with at least one field being a list of class instances or a dictionary of class instances, and the fields need to be meaningfully modified in at least one route, they can't be constants), a second dataclass, at least 3 input fields, at least 3 meaningful if statements, at least 1 loop that iterates over an attribute of the list of class instances or dictionary of class instances in a meaningful way, and no global variables. The project I am moving forward with is a "What One Piece Character Are You?" quiz, where based off the answers the user gives to the questions, it will show what One Piece character they relate with the most. I am entirely allowed (and encouraged) to use AI for this project.
+After doing some planning, I have come up with this plan for the website.
+Five State attributes:
+user_name (str): Stores the user's name. Modified when the user enters their name on the home page.
+current_page (str): Tracks which page the user is currently viewing. Modified when they navigate between pages.
+quiz_answers (list[str]): Stores the user's answers to the quiz questions. New answers are added when the user submits their quiz.
+characters (list[Character]): Stores instances of the Character dataclass. Character scores are updated based on the user's answers.
+result (str): Stores the name of the One Piece character that best matches the user's answers. Modified after the quiz is completed.
+Second dataclass (Character):
+name (str): Stores the character's name.
+description (str): Stores a short personality description.
+traits (list[str]): Stores personality traits associated with the character.
+score (int): Tracks how many points the character receives from the user's answers. Modified throughout quiz evaluation.
+For the Character dataclass, start with these 5 characters that could end up being the quiz result.
+-Monkey D. Luffy
+-Roronoa Zoro
+-Vinsmoke Sanji
+-Nami
+-Tony Tony Chopper
+routes:
+home: Displays the welcome page and allows users to enter their name.
+instructions: Explains how the personality quiz works and what users should expect.
+quiz: Displays the personality questions and input fields (questions should be multiple choice).
+submit_quiz: Processes the user's answers and calculates character scores. (this is a processing route, not a separate page.)
+results: Displays the character that best matches the user's personality.
+character_directory: Displays all five One Piece characters and their descriptions.
+character_details: Displays more information about a selected character from the character directory when they are clicked on.
+restart: Resets the quiz so the user can take it again.
+Pages:
+home page: First page users will see. Has a the title and includes a TextBox where the user can enter their name. Also has a button that will take the user to the character directory page when clicked.
+instructions page: Explains the purpose of the quiz, how the quiz will work, how many questions there are. A start button will take the user to the quiz page when clicked.
+quiz page: Displays the five quiz personality questions. User selects their answers using SelectBox inputs (all questions are multiple choice). When they have answered all questions, there is a submit button that takes them to the results page when clicked.
+results page: Displays the character that best matches the user's personality. Shows the character's name, image, description, and matching personality traits. Also has a restart button that takes the user back to the home screen when clicked and allows them to retake the quiz.
+character directory page: Displays the five characters included in the quiz. Users can browse their names, images, and descriptions.
+character details page: Displays more detailed information about the selected character from the character directory page, including their personality traits and image.
+User inputs:
+TextBox: Input the user's name on the home page.
+SelectBox (for questions 1,2,3,4,5): User clicks on the button to select their answer for a given question.
+Meaningful if statements:
+If statement 1: Checking whether the user entered their name
+When the user clicks the start button, the program checks whether the name field is empty.
+If the user entered a name, they can proceed to the instructions page.
+Otherwise, the application displays a message asking them to enter their name.
+If statement 2: Checking whether all quiz questions have been answered
+When the user submits the quiz, the program checks whether they answered all three questions.
+If all questions have answers, the application calculates their character match.
+Otherwise, the application displays a message asking them to complete the unanswered questions.
+If statement 3: Determining the character with the highest score
+After calculating the scores, the program checks which character has the highest score.
+If a character has a higher score than the current best match, that character becomes the new result.
+This ensures the application displays the character who received the most points.
+If statement 4: Checking whether the user wants to restart
+When the user clicks the restart button, the program resets their answers and character scores.
+The user is returned to the quiz's starting page.
+This allows them to take the quiz again without their previous results affecting the new quiz.
+1 meaningful loop:
+The loop will iterate through the characters list in the State dataclass to determine which One Piece character best matches the user's answers.
+Here is how it will work:
+When the user submits their quiz, the program retrieves their answers.
+The program loops through every Character instance stored in state.characters.
+For each character, the program compares their personality traits with the traits associated with the user's answers.
+Every time a character matches an answer, their score increases.
+After checking all five characters, the program identifies which character has the highest score.
+The winning character's name is stored in state.result.
+For example:
+Character
+Matching answers
+Final score
+Luffy
+3
+3
+Zoro
+1
+1
+Nami
+2
+2
+Sanji
+2
+2
+Chopper
+1
+1
+Example result: The application would display Luffy because he received the highest score.
+Build this website using python and Drafter. Make sure to have all requirements. There should be 5 quiz questions that are all multiple choice. If anything outlined in the given plan does not/will not work, feel free to change as needed to make a functional website, but make sure to meet all requirements regardless.
+
+ChatGPT Codex: Built the app in [one_piece_quiz.py](C:/Users/ecohe/Documents/Codex/2026-11-10/i-am-a-computer-science-student/outputs/one_piece_quiz.py) and added run instructions and a rubric checklist in [README_one_piece_quiz.md](C:/Users/ecohe/Documents/Codex/2026-11-10/i-am-a-computer-science-student/outputs/README_one_piece_quiz.md).
+It includes ten routes, six user-facing pages, five multiple-choice questions, a name field, and a State dataclass with six changing fields. The scoring loop compares answers with each Character’s traits and updates character scores. The app follows Drafter’s documented state and route and form input patterns.
+To run it:
+python -m pip install drafter
+python one_piece_quiz.py
+Me: I checked the source against the requirements but did not launch the app. Character portraits load from external URLs and require an internet connection.
+The character portrait images don't seem to be working. I found this guide on the Drafter official site.
+https://drafter-edu.github.io/drafter/dev/api/drafter/components/images/
+Using this could you make it so the images show? Everything else is perfect, nothing else should be changed.
+ChatGPT Codex: Updated only the five portrait URLs in [one_piece_quiz.py (line 407)](C:/Users/ecohe/Documents/Codex/2026-11-10/i-am-a-computer-science-student/outputs/one_piece_quiz.py:407), replacing the Special:FilePath redirects with direct image CDN URLs. The existing Image components and all other app code are unchanged.
+This follows Drafter’s image guide, which supports external image URLs. I confirmed the old redirect URLs are gone; I haven’t launched the app in a browser.
+
+Me: Why is this how the images look? When I drag and drop them into a different tab, they show up fine.
+
+ChatGPT Codex: The most likely cause is hotlink protection. Opening an image directly sends a different request from embedding it in your quiz page; the embedded request can include the page’s referrer, which the image host may block.
+I added referrerpolicy="no-referrer" to all three portrait display locations in [one_piece_quiz.py (line 273)](C:/Users/ecohe/Documents/Codex/2026-11-10/i-am-a-computer-science-student/outputs/one_piece_quiz.py:273). Drafter’s Image component supports extra HTML attributes for this purpose (image component guide). The page layout and quiz logic are unchanged. I haven’t relaunched the app to confirm the images render.
+
+Me: That didn't work, if I give you images would it be possible to locally put the images in so you wouldn't have to depend on the image host?
+
+ChatGPT Codex: Yes. Upload five portraits—one each for Luffy, Zoro, Sanji, Nami, and Chopper—and I can put them in a local assets folder beside the app and update the image paths. Drafter supports local image files, so the quiz won’t depend on an image host. Drafter image guide
+PNG or JPG files work. Keep the assets folder with the Python file when you submit the project.
+
+Me: Luffy, Zoro, Sanji, Nami, and Chopper in that order. (I uploaded images for each character along with this message)
+
+ChatGPT Codex: Done. The five portraits are now local files, mapped in the order you gave:
+[Luffy](C:/Users/ecohe/Documents/Codex/2026-11-10/i-am-a-computer-science-student/outputs/assets/luffy.png)
+[Zoro](C:/Users/ecohe/Documents/Codex/2026-11-10/i-am-a-computer-science-student/outputs/assets/zoro.png)
+[Sanji](C:/Users/ecohe/Documents/Codex/2026-11-10/i-am-a-computer-science-student/outputs/assets/sanji.png)
+[Nami](C:/Users/ecohe/Documents/Codex/2026-11-10/i-am-a-computer-science-student/outputs/assets/nami.png)
+[Chopper](C:/Users/ecohe/Documents/Codex/2026-11-10/i-am-a-computer-science-student/outputs/assets/chopper.png)
+I updated the app to use these local paths in [one_piece_quiz.py](C:/Users/ecohe/Documents/Codex/2026-11-10/i-am-a-computer-science-student/outputs/one_piece_quiz.py) and updated the [README](C:/Users/ecohe/Documents/Codex/2026-11-10/i-am-a-computer-science-student/outputs/README_one_piece_quiz.md). Keep the assets folder beside the Python file when you run or submit it. I confirmed all five files and references are present; I haven’t relaunched the app.
+
+Me: The images work perfectly now. Write some unit tests for the functions using this guide https://drafter-edu.github.io/drafter/reference/testing-functions/. Each route function has to have at least one unit test, and if a function can't be unit tested, note it in a comment.
+
+ChatGPT Codex: Added ten named unit test functions to [one_piece_quiz.py](C:/Users/ecohe/Documents/Codex/2026-11-10/i-am-a-computer-science-student/outputs/one_piece_quiz.py), one for each route. They call the routes directly with isolated test state and cover validation, scoring, page content, character details, and restart behavior.
+The tests run before start_server and use Drafter’s assertions as described in its testing guide. All routes can be tested this way, so none needed an “untestable” comment. Static review confirms ten routes and ten route test functions; I haven’t run the app’s test panel.
+
+Me: That broke the code, I'm getting this error: Traceback (most recent call last):
+File "C:\Users\ecohe\OneDrive\Desktop\cs project\final project.py", line 556, in <module>
+test_submit_quiz_route()
+File "C:\Users\ecohe\OneDrive\Desktop\cs project\final project.py", line 492, in test_submit_quiz_route
+incomplete_page = submit_quiz(
+File "C:\Users\ecohe\OneDrive\Desktop\cs project\final project.py", line 219, in submit_quiz
+return quiz(state)
+File "C:\Users\ecohe\OneDrive\Desktop\cs project\final project.py", line 193, in quiz
+SelectBox("q" + str(index + 1), options, selected_answer)
+File "C:\Users\ecohe\AppData\Roaming\Python\Python314\site-packages\drafter\components\forms.py", line 276, in init
+raise StudentFacingError(
+drafter.data.errors.StudentFacingError: default_value 'luffy-q2' is not in options ['-- Choose an answer --', 'A big dream matters more to me than playing it safe.', 'Practice and discipline are the best way forward.', "A little kindness can turn someone's day around.", 'I protect my resources and think several steps ahead.', 'I ask questions and learn before I decide.']
+
+ChatGPT Codex: The test fixture used values like luffy-q2, which aren’t quiz choices. When the incomplete-answer test redraws the quiz, Drafter tries to use those values as SelectBox defaults and rejects them; defaults must match an option. Drafter SelectBox docs
+I replaced the test values with the actual answer text in both the [workspace app](C:/Users/ecohe/Documents/Codex/2026-11-10/i-am-a-computer-science-student/outputs/one_piece_quiz.py) and the OneDrive copy named final project.py from your traceback. A static check confirms the invalid test tokens are gone. I haven’t run the app.
