@@ -396,7 +396,7 @@ def make_test_state() -> State:
                     "I choose freedom and adventure over a predictable path.",
                 ],
                 0,
-                "assets/luffy.png",
+                "one-piece-personality-quiz/assets/luffy.png",
                 "Luffy's test background.",
             ),
             Character(
@@ -404,7 +404,7 @@ def make_test_state() -> State:
                 "A focused swordsman.",
                 ["zoro-trait"],
                 0,
-                "assets/zoro.png",
+                "one-piece-personality-quiz/assets/zoro.png",
                 "Zoro's test background.",
             ),
             Character(
@@ -412,7 +412,7 @@ def make_test_state() -> State:
                 "A caring cook.",
                 ["sanji-trait"],
                 0,
-                "assets/sanji.png",
+                "one-piece-personality-quiz/assets/sanji.png",
                 "Sanji's test background.",
             ),
             Character(
@@ -420,7 +420,7 @@ def make_test_state() -> State:
                 "A clever navigator.",
                 ["nami-trait"],
                 0,
-                "assets/nami.png",
+                "one-piece-personality-quiz/assets/nami.png",
                 "Nami's test background.",
             ),
             Character(
@@ -428,7 +428,7 @@ def make_test_state() -> State:
                 "A kind doctor.",
                 ["chopper-trait"],
                 0,
-                "assets/chopper.png",
+                "one-piece-personality-quiz/assets/chopper.png",
                 "Chopper's test background.",
             ),
         ],
@@ -502,7 +502,7 @@ def test_results_route() -> None:
     state.result = "Nami"
     page = results(state)
     assert_has(page, "Your closest match is Nami.")
-    assert_has(page, Image("assets/nami.png", 260, alt="Portrait of Nami"))
+    assert_has(page, Image("one-piece-personality-quiz/assets/nami.png", 260, alt="Portrait of Nami"))
 
 
 def test_character_directory_route() -> None:
@@ -576,7 +576,7 @@ start_server(
                     "I choose freedom and adventure over a predictable path.",
                 ],
                 score=0,
-                image_url="assets/luffy.png",
+                image_url="one-piece-personality-quiz/assets/luffy.png",
                 background=(
                     "Luffy is the captain of the Straw Hat Pirates. His "
                     "ambition is to find the One Piece and become King of "
@@ -597,7 +597,7 @@ start_server(
                     "I pick a tough goal and stick with it.",
                 ],
                 score=0,
-                image_url="assets/zoro.png",
+                image_url="one-piece-personality-quiz/assets/zoro.png",
                 background=(
                     "Zoro is the crew's swordsman. He trains toward his "
                     "goal of becoming the world's greatest swordsman and "
@@ -618,7 +618,7 @@ start_server(
                     "I put myself on the line for people I care about.",
                 ],
                 score=0,
-                image_url="assets/sanji.png",
+                image_url="one-piece-personality-quiz/assets/sanji.png",
                 background=(
                     "Sanji is the Straw Hat Pirates' cook. He is a skilled "
                     "fighter who values food, hospitality, and protecting "
@@ -639,7 +639,7 @@ start_server(
                     "I value security, independence, and a good map.",
                 ],
                 score=0,
-                image_url="assets/nami.png",
+                image_url="one-piece-personality-quiz/assets/nami.png",
                 background=(
                     "Nami is the Straw Hat Pirates' navigator. She is "
                     "skilled at reading weather and charts, and she dreams "
@@ -660,7 +660,7 @@ start_server(
                     "I stay curious and compassionate under pressure.",
                 ],
                 score=0,
-                image_url="assets/chopper.png",
+                image_url="one-piece-personality-quiz/assets/chopper.png",
                 background=(
                     "Chopper is the crew's doctor, a reindeer who gained "
                     "human-like abilities after eating a Devil Fruit. He "
