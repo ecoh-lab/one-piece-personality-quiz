@@ -10,7 +10,6 @@ from drafter import *
 
 @dataclass
 class Character:
-    """One possible quiz result and the traits that earn it points."""
 
     name: str
     description: str
@@ -22,7 +21,6 @@ class Character:
 
 @dataclass
 class State:
-    """All information that changes while a visitor uses the quiz."""
 
     user_name: str
     current_page: str
@@ -46,7 +44,14 @@ set_website_framed(False)
 
 @route
 def home(state: State) -> Page:
-    """Welcome page and name input."""
+    """
+    Welcome page and name input.
+    
+    Args:
+        state (State)
+    Returns:
+        Page (home page)
+    """
     state.current_page = "home"
     content = [
         Header("What One Piece Character Are You?"),
@@ -64,13 +69,28 @@ def home(state: State) -> Page:
 
 @route
 def index(state: State) -> Page:
-    """Drafter opens the route named index at the site root."""
+    """
+    Drafter opens the route named index at the site root.
+    
+    Args:
+        state (State)
+    Returns:
+        Page
+    """
     return home(state)
 
 
 @route
 def start_quiz(state: State, name: str) -> Page:
-    """Validate the name, then continue to the instructions."""
+    """
+    Validate the name, then continue to the instructions.
+    
+    Args:
+        state (State)
+        name (str): Name the user enters.
+    Returns:
+        Page (home page)
+    """
     if name.strip() == "":
         state.feedback = "Please enter your name before starting the quiz."
         return home(state)
@@ -82,7 +102,14 @@ def start_quiz(state: State, name: str) -> Page:
 
 @route
 def instructions(state: State) -> Page:
-    """Explain the quiz before the visitor begins."""
+    """
+    Explain the quiz before the visitor begins.
+    
+    Args:
+        state (State)
+    Returns:
+        Page (instructions page)
+    """
     state.current_page = "instructions"
     content = [
         Header("Before you set sail"),
@@ -102,7 +129,14 @@ def instructions(state: State) -> Page:
 
 @route
 def quiz(state: State) -> Page:
-    """Show five multiple-choice questions using SelectBox inputs."""
+    """
+    Show five multiple-choice questions using SelectBox inputs.
+    
+    Args:
+        state (State)
+    Returns:
+        Page (quiz page)
+    """
     state.current_page = "quiz"
     placeholder = "-- Choose an answer --"
 
@@ -201,7 +235,19 @@ def submit_quiz(
     q4: str,
     q5: str,
 ) -> Page:
-    """Save the five answers, score characters, and show the result."""
+    """
+    Save the five answers, score characters, and show the result.
+    
+    Args:
+        state (State)
+        q1 (str): the first question answer
+        q2 (str): the second question answer
+        q3 (str): the third question answer
+        q4 (str): the fourth question answer
+        q5 (str): the fifth question answer
+    Returns:
+        Page (quiz page)
+    """
     state.quiz_answers = [q1, q2, q3, q4, q5]
 
     if "-- Choose an answer --" in state.quiz_answers:
@@ -228,7 +274,14 @@ def submit_quiz(
 
 @route
 def results(state: State) -> Page:
-    """Display the best match and its personality traits."""
+    """
+    Display the best match and its personality traits.
+    
+    Args:
+        state (State)
+    Returns:
+        Page (results page)
+    """
     state.current_page = "results"
     if state.result == "":
         return Page(
@@ -282,7 +335,14 @@ def results(state: State) -> Page:
 
 @route
 def character_directory(state: State) -> Page:
-    """Show all five possible results and link to their detail pages."""
+    """
+    Show all five possible results and link to their detail pages.
+    
+    Args:
+        state (State)
+    Returns:
+        Page (character directory page)
+    """
     state.current_page = "character_directory"
     content = [
         Header("Meet the Straw Hat crew"),
@@ -318,7 +378,15 @@ def character_directory(state: State) -> Page:
 
 @route
 def character_details(state: State, character_name: str) -> Page:
-    """Show the selected character's background and matching traits."""
+    """
+    Show the selected character's background and matching traits.
+    
+    Args:
+        state (State)
+        character_name (str): name of the selected character
+    Returns:
+        Page (character details page)
+    """
     state.current_page = "character_details"
     selected_character = None
 
@@ -361,7 +429,14 @@ def character_details(state: State, character_name: str) -> Page:
 
 @route
 def restart(state: State) -> Page:
-    """Reset quiz data and return to the home page."""
+    """
+    Reset quiz data and return to the home page.
+    
+    Args:
+        state (State)
+    Returns:
+        Page (home page)
+    """
     if state.result != "":
         state.quiz_answers = []
         state.result = ""
@@ -396,7 +471,7 @@ def make_test_state() -> State:
                     "I choose freedom and adventure over a predictable path.",
                 ],
                 0,
-                "one-piece-personality-quiz/assets/luffy.png",
+                "assets/luffy.png",
                 "Luffy's test background.",
             ),
             Character(
@@ -404,7 +479,7 @@ def make_test_state() -> State:
                 "A focused swordsman.",
                 ["zoro-trait"],
                 0,
-                "one-piece-personality-quiz/assets/zoro.png",
+                "assets/zoro.png",
                 "Zoro's test background.",
             ),
             Character(
@@ -412,7 +487,7 @@ def make_test_state() -> State:
                 "A caring cook.",
                 ["sanji-trait"],
                 0,
-                "one-piece-personality-quiz/assets/sanji.png",
+                "assets/sanji.png",
                 "Sanji's test background.",
             ),
             Character(
@@ -420,7 +495,7 @@ def make_test_state() -> State:
                 "A clever navigator.",
                 ["nami-trait"],
                 0,
-                "one-piece-personality-quiz/assets/nami.png",
+                "assets/nami.png",
                 "Nami's test background.",
             ),
             Character(
@@ -428,7 +503,7 @@ def make_test_state() -> State:
                 "A kind doctor.",
                 ["chopper-trait"],
                 0,
-                "one-piece-personality-quiz/assets/chopper.png",
+                "assets/chopper.png",
                 "Chopper's test background.",
             ),
         ],
@@ -438,18 +513,21 @@ def make_test_state() -> State:
 
 
 def test_home_route() -> None:
+    """Tests home route function"""
     page = home(make_test_state())
     assert_has(page, Header("What One Piece Character Are You?"))
     assert_has(page, Button("Start the quiz", "start_quiz"))
 
 
 def test_index_route() -> None:
+    """Tests index route function"""
     page = index(make_test_state())
     assert_has(page, Header("What One Piece Character Are You?"))
     assert_equal(page.state.current_page, "home")
 
 
 def test_start_quiz_route() -> None:
+    """Tests start quiz route function"""
     valid_page = start_quiz(make_test_state(), "  Ada  ")
     assert_equal(valid_page.state.user_name, "Ada")
     assert_has(valid_page, Header("Before you set sail"))
@@ -459,12 +537,14 @@ def test_start_quiz_route() -> None:
 
 
 def test_instructions_route() -> None:
+    """Tests instructions route function"""
     page = instructions(make_test_state())
     assert_has(page, Button("Begin the five questions", "quiz"))
     assert_equal(page.state.current_page, "instructions")
 
 
 def test_quiz_route() -> None:
+    """Tests quiz route function"""
     page = quiz(make_test_state())
     assert_has(page, "1. When a challenge appears")
     assert_has(page, "5. Pick the value that matters most to you.")
@@ -472,6 +552,7 @@ def test_quiz_route() -> None:
 
 
 def test_submit_quiz_route() -> None:
+    """Tests submit quiz route function"""
     state = make_test_state()
     page = submit_quiz(
         state,
@@ -497,15 +578,17 @@ def test_submit_quiz_route() -> None:
 
 
 def test_results_route() -> None:
+    """Tests results route function"""
     state = make_test_state()
     state.user_name = "Ada"
     state.result = "Nami"
     page = results(state)
     assert_has(page, "Your closest match is Nami.")
-    assert_has(page, Image("one-piece-personality-quiz/assets/nami.png", 260, alt="Portrait of Nami"))
+    assert_has(page, Image("assets/nami.png", 260, alt="Portrait of Nami"))
 
 
 def test_character_directory_route() -> None:
+    """Tests character directory route function"""
     page = character_directory(make_test_state())
     assert_has(page, Header("Monkey D. Luffy"))
     assert_has(page, Header("Tony Tony Chopper"))
@@ -520,6 +603,7 @@ def test_character_directory_route() -> None:
 
 
 def test_character_details_route() -> None:
+    """Tests character details route function"""
     page = character_details(make_test_state(), "Tony Tony Chopper")
     assert_has(page, Header("Tony Tony Chopper"))
     assert_has(page, "Chopper's test background.")
@@ -529,6 +613,7 @@ def test_character_details_route() -> None:
 
 
 def test_restart_route() -> None:
+    """Tests restart route function"""
     state = make_test_state()
     state.user_name = "Ada"
     state.quiz_answers = ["I trust my instincts and leap into action."]
@@ -576,7 +661,7 @@ start_server(
                     "I choose freedom and adventure over a predictable path.",
                 ],
                 score=0,
-                image_url="one-piece-personality-quiz/assets/luffy.png",
+                image_url="assets/luffy.png",
                 background=(
                     "Luffy is the captain of the Straw Hat Pirates. His "
                     "ambition is to find the One Piece and become King of "
@@ -597,7 +682,7 @@ start_server(
                     "I pick a tough goal and stick with it.",
                 ],
                 score=0,
-                image_url="one-piece-personality-quiz/assets/zoro.png",
+                image_url="assets/zoro.png",
                 background=(
                     "Zoro is the crew's swordsman. He trains toward his "
                     "goal of becoming the world's greatest swordsman and "
@@ -618,7 +703,7 @@ start_server(
                     "I put myself on the line for people I care about.",
                 ],
                 score=0,
-                image_url="one-piece-personality-quiz/assets/sanji.png",
+                image_url="assets/sanji.png",
                 background=(
                     "Sanji is the Straw Hat Pirates' cook. He is a skilled "
                     "fighter who values food, hospitality, and protecting "
@@ -639,7 +724,7 @@ start_server(
                     "I value security, independence, and a good map.",
                 ],
                 score=0,
-                image_url="one-piece-personality-quiz/assets/nami.png",
+                image_url="assets/nami.png",
                 background=(
                     "Nami is the Straw Hat Pirates' navigator. She is "
                     "skilled at reading weather and charts, and she dreams "
@@ -660,7 +745,7 @@ start_server(
                     "I stay curious and compassionate under pressure.",
                 ],
                 score=0,
-                image_url="one-piece-personality-quiz/assets/chopper.png",
+                image_url="assets/chopper.png",
                 background=(
                     "Chopper is the crew's doctor, a reindeer who gained "
                     "human-like abilities after eating a Devil Fruit. He "
